@@ -1,0 +1,24 @@
+{
+  "name": "co-ccrps-be",
+  "version": "1.0.0",
+  "description": "Credit Card Reward Point System Backend",
+  "main": "server.js",
+  "scripts": {
+    "test": "test"
+  },
+  "keywords": [
+    "MEAN",
+    "Stack",
+    "MongoDB",
+    "ExpressJS",
+    "Angular",
+    "NodeJS",
+    "FinTech"
+  ],
+  "author": "Manan Paruthi",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.2",
+    "mongoose": "^6.1.9"
+  }
+}
