@@ -6,7 +6,7 @@ To Start Backend =>
 2) Run command "nodemon app.js"
 
 To Start Frontend => 
-1) Go to frontend foler
+1) Go to frontend folder
 2) Run command "ng serve --open"
 
 
