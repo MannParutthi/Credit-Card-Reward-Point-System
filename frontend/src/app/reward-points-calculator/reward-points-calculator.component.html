@@ -1,0 +1,58 @@
+<div class="container">
+  <form [formGroup]="formGroup">
+    <h1>Add Transactions: </h1>
+    <div fxLayout="row" fxLayout.xs="column">
+      <mat-form-field appearance="outline" class="field">
+        <mat-label>Date</mat-label>
+        <input matInput [matDatepicker]="picker" formControlName="date" />
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+
+      <br />
+
+      <mat-form-field appearance="outline" class="field">
+        <mat-label>Merchant Code</mat-label>
+        <input matInput formControlName="merchant_code" />
+      </mat-form-field>
+
+      <br />
+
+      <mat-form-field appearance="outline" class="field">
+        <mat-label>Amount Cents</mat-label>
+        <input matInput type="number" formControlName="amount_cents" />
+      </mat-form-field>
+    </div>
+  </form>
+
+  <button mat-raised-button color="primary" (click)="add()">Add</button>
+</div>
+
+<div class="container" *ngIf="listOfTransactions.length > 0">
+  <h1>Transactions: </h1>
+  <br />
+  <div *ngFor="let transaction of listOfTransactions">
+    <div fxLayout="row" fxLayout.xs="column">
+      <div><b>Date:</b> {{ transaction.date }}</div> &nbsp;
+      <div><b>Merchant Code:</b> {{ transaction.merchant_code }}</div> &nbsp;
+      <div><b>Amount in Cents :</b> {{ transaction.amount_cents }}</div> &nbsp;
+    </div>
+    <br />
+  </div>
+
+  <button mat-raised-button color="primary" style="margin-bottom: 20px" (click)="calculateRewardPoints()">
+    Calculate Reward Points
+  </button>
+</div>
+
+<div class="container" *ngIf="rewardPoints > 0">
+  <h1>Your Reward Points are : {{rewardPoints}}</h1>
+
+  <div *ngFor="let rule of rulesApplied | keyvalue">
+    <h2>Rule No {{rule.key}} is applied for {{rule.value}} times</h2>
+  </div>
+
+  <button mat-raised-button color="primary" style="margin-bottom: 20px" (click)="checkRules()">
+    Check Rules
+  </button>
+</div>
