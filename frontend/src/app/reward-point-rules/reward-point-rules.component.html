@@ -1,12 +1,10 @@
 <div class="container">
   <div *ngIf="rulesDetails">
-    <div>Rules List Name: {{ rulesDetails.rulesListName }}</div>
+    <div><b>Rules List Name:</b> {{ rulesDetails.rulesListName }}</div>
     <br />
-    <div>Rules List Id: {{ rulesDetails.rulesListId }}</div>
-    <br />
-    <div>Rules:</div>
+    <div><b>Rules:</b></div>
     <div *ngFor="let rule of rulesDetails.rulesList" class="indent">
-      <div>Rule Id: {{ rule.ruleId }}</div>
+      <div>Rule No: {{ rule.ruleId }}</div>
       <div>Points: {{ rule.points }}</div>
       <div>Conditions:</div>
       <div *ngFor="let condition of rule.conditions" class="indent">
