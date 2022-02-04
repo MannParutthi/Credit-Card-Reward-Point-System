@@ -1,13 +1,13 @@
 # Credit Card Reward Point System - Full Stack Application
-Tech Stack : MongoDB, Express.js, Angular & Node.js - MEAN Stack
+***Tech Stack :*** MongoDB, Express.js, Angular & Node.js - MEAN Stack
 
-To Start Backend => 
+## To Start Backend
 1) Go to backend folder in Command Prompt (CMD)
 2) Run command "npm i" to install all dependencies
 3) Run command "nodemon app.js" to start the backend application server
 4) Backend server will start running on Port 3000 => http://localhost:3000/
 
-To Start Frontend => 
+## To Start Frontend
 1) Go to frontend folder in Command Prompt (CMD)
 2) Run command "npm i" to install all dependencies
 3) Run command "ng serve --open" to start the frontend application
