@@ -1,4 +1,4 @@
-# Credit Card Reward Point System - Full Stack Application
+# Credit Card Reward Point System - JavaScript Full Stack Application
 ***Tech Stack :*** MongoDB, Express.js, Angular & Node.js - MEAN Stack
 
 ## To Start Backend
@@ -14,7 +14,7 @@
 4) Browser will open and frontend application will start running on Port 4200 => http://localhost:4200/
 
 
-# Versions :
+# Softwares / Tools required :
 1) MongoDB shell version: 5.0.6
 2) Express version: 4.17.2
 3) Angular CLI version: 13.2.1
