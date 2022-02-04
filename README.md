@@ -4,10 +4,12 @@ Tech Stack : MongoDB, Express.js, Angular & Node.js - MEAN Stack
 To Start Backend => 
 1) Go to backend folder 
 2) Run command "nodemon app.js"
+3) Open http://localhost:3000/ on browser
 
 To Start Frontend => 
 1) Go to frontend folder
 2) Run command "ng serve --open"
+3) Open http://localhost:4200/ on browser
 
 
 # Versions :
