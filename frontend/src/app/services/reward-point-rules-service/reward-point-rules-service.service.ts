@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { RewardPointRulesModel } from './reward-point-rules-service.model';
 
 @Injectable({
   providedIn: 'root'
@@ -10,8 +11,8 @@ export class RewardPointRulesService {
 
   constructor(private http: HttpClient) { }
 
-  getRules(): Observable<any> {
+  getRules(): Observable<RewardPointRulesModel> {
     let uri = "getRules";
-    return this.http.get(`${this.baseUrl}/${uri}`);
+    return this.http.get(`${this.baseUrl}/${uri}`) as Observable<RewardPointRulesModel>;
   }
 }

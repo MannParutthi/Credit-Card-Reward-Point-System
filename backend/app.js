@@ -4,6 +4,7 @@ const mongoose = require('./database/mongoose');
 
 const rules = require('./database/models/rules');
 const initialRulesSetup = require('./rulesSetup');
+const { convertCentsToDollars, rulesComparator } = require('./utils');
 
 app.use(express.json());
 
@@ -31,28 +32,17 @@ app.post('/calculateRewardPoints', (req, res) => {
         //finding total amount of transactions on all shops 
         req.body.forEach(transaction => {             
             if(['sportcheck', 'tim_hortons', 'subway'].includes(transaction.merchant_code)) {
-                totalTransactions[transaction.merchant_code] += (transaction.amount_cents/100);
+                totalTransactions[transaction.merchant_code] += convertCentsToDollars(transaction.amount_cents);
             }
             else {
-                totalTransactions["others"] += (transaction.amount_cents/100);
+                totalTransactions["others"] += convertCentsToDollars(transaction.amount_cents);
             }
         });
         console.log("totalTransactions => ", totalTransactions)
 
         // finding main rules list from the multiple rulesList and sorting it according to priority
         let mainRules = rulesList.find(rules => rules.rulesListName == rulesListName);
-        let priorityRulesList = (mainRules.rulesList).sort((a,b) => {
-            if (b.points == a.points) {
-                let aCondTotalAmt = 0
-                a.conditions.forEach(cnd => { aCondTotalAmt += cnd.purchaseAmount });
-                let bCondTotalAmt = 0
-                b.conditions.forEach(cnd => { bCondTotalAmt += cnd.purchaseAmount });
-                return (b.points/bCondTotalAmt) - (a.points/aCondTotalAmt);
-            }
-            else {
-                return b.points - a.points ;
-            }
-        });
+        let priorityRulesList = (mainRules.rulesList).sort((a,b) => rulesComparator(a,b));
         console.log("priorityRulesList => ", priorityRulesList);
 
         let rulesApplied = {};
@@ -71,6 +61,7 @@ app.post('/calculateRewardPoints', (req, res) => {
                         areAllConditionsMet = false;
                     }
                 });
+                
                 if(areAllConditionsMet) {
                     rule.conditions.forEach(condition => { 
                         if(["sportcheck", "tim_hortons", "subway"].includes(condition.merchantCode)){
