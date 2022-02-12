@@ -4,7 +4,8 @@
   "description": "Credit Card Reward Point System Backend",
   "main": "server.js",
   "scripts": {
-    "test": "test"
+    "test": "nyc jasmine --config=jasmine.json",
+    "coverage": "nyc --reporter=lcov --reporter=text-lcov npm test"
   },
   "keywords": [
     "MEAN",
@@ -19,6 +20,9 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.17.2",
-    "mongoose": "^6.1.9"
+    "jasmine": "^4.0.2",
+    "mongoose": "^6.1.9",
+    "nyc": "^15.1.0",
+    "request": "^2.88.2"
   }
 }

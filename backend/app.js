@@ -25,7 +25,7 @@ app.get('/getRules', (req, res) => {
 });
 
 app.post('/calculateRewardPoints', (req, res) => {
-    console.log("==================== calculateRewardPoints =========================")
+    console.log("==================== calculateRewardPoints =========================0", req)
     let rewardPoints = 0
     let totalTransactions = {sportcheck: 0, tim_hortons: 0, subway: 0, others: 0}
     rules.find({}).then(rulesList => {
