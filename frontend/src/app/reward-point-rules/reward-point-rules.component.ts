@@ -15,6 +15,10 @@ export class RewardPointRulesComponent implements OnInit {
   constructor(private rewardPointRulesService: RewardPointRulesService) { }
 
   ngOnInit(): void {
+    this.getAllRules();
+  }
+
+  getAllRules() {
     this.rewardPointRulesService.getRules().subscribe({
       next: (res) => {
         this.rulesDetails = res;

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { TransactionModel } from '../services/reward-point-calculator-services/reward-points-calculator-services.model';
 import { CalculateRewardsPointsResponse, RewardPointsCalculatorService } from '../services/reward-point-calculator-services/reward-points-calculator-services.service';
@@ -45,7 +45,6 @@ export class RewardPointsCalculatorComponent implements OnInit {
     console.log("listOfTransactions => ", this.listOfTransactions)
     this.rewardPointsCalculatorService.getRewardPoints(this.listOfTransactions).subscribe({
       next: (res: CalculateRewardsPointsResponse) => {
-        //@ts-ignore
         this.rewardPoints = Number(res.rewardPoints);
         this.rulesApplied = res.rulesApplied;
         console.log("rewardPoints res => ", res);

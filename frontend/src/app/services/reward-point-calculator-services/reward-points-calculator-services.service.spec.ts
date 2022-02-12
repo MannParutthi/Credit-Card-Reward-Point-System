@@ -1,16 +1,25 @@
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
+import { Observable } from 'rxjs';
 
-import { RewardPointsCalculatorServicesService } from './reward-points-calculator-services.service';
+import { RewardPointsCalculatorService } from './reward-points-calculator-services.service';
 
-describe('RewardPointsCalculatorServicesService', () => {
-  let service: RewardPointsCalculatorServicesService;
+describe('RewardPointsCalculatorService', () => {
+  let service: RewardPointsCalculatorService;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
-    service = TestBed.inject(RewardPointsCalculatorServicesService);
+    TestBed.configureTestingModule({
+      imports: [HttpClientTestingModule]
+    });
+    service = TestBed.inject(RewardPointsCalculatorService);
   });
 
   it('should be created', () => {
     expect(service).toBeTruthy();
   });
+
+  it('getRewardPoints', () => {
+    expect(service.getRewardPoints([ { date: "1/1/2021", merchant_code: "subway", amount_cents: 5000} ])).toBeInstanceOf(Observable);
+  });
+
 });
