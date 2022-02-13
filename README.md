@@ -1,23 +1,23 @@
 # Credit Card Reward Point System - JavaScript Full Stack Application with Unit Testing
 ***Tech Stack :*** MongoDB, Express.js, Angular & Node.js - MEAN Stack
 
+# How to start / run application
 ## To Start Backend
 1) Go to backend folder in Command Prompt (CMD)
 2) Run command "npm i" to install all dependencies
 3) Run command "nodemon app.js" to start the backend application server
 4) Backend server will start running on Port 3000 => http://localhost:3000/
-
 ## To Start Frontend
 1) Go to frontend folder in Command Prompt (CMD)
 2) Run command "npm i" to install all dependencies
 3) Run command "ng serve --open" to start the frontend application
 4) Browser will open and frontend application will start running on Port 4200 => http://localhost:4200/
 
-## Unit Testing
-# Backend
+# Unit Testing
+## Backend
 1) To check code coverage of unit testing => Run command "npm run coverage"
 2) To open code coverage report => Go to path "/backend/coverage/lcov-report" & open "index.html" file
-# Frontend
+## Frontend
 1) To check code coverage of unit testing => Run command "ng test --code-coverage"
 2) To open code coverage report => Go to path "frontend/coverage/frontend" & open "index.html" file
 
