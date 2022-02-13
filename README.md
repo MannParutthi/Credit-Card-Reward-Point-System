@@ -22,7 +22,7 @@
 3) Angular CLI version: 13.2.1
 4) Node version: 16.13.0
 5) Node Package Manager (npm) version: 8.4.0
-6) Testing & Code Coverage: Jasmine, Karma, nyc(istanbul) 
+6) Testing & Code Coverage: Jasmine, Karma, nyc(istanbul), supertest 
 
 
 # Details about the project 
