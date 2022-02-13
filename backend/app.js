@@ -1,7 +1,6 @@
 const express = require('express');
 const app = express();
 const mongoose = require('./database/mongoose');
-
 const rules = require('./database/models/rules');
 const initialRulesSetup = require('./rulesSetup');
 const { convertCentsToDollars, rulesComparator } = require('./utils');
@@ -16,21 +15,20 @@ app.use((req, res, next) => {
 });
 
 initialRulesSetup();
-const rulesListName = "main"; // main, example1, example2, example3
 
 app.get('/getRules', (req, res) => {
-    rules.findOne({rulesListName: rulesListName})
+    rules.findOne({rulesListName: req.query['selectedRules']})
         .then(rulesList => res.send(rulesList))
         .catch(err => console.log(err));
 });
 
 app.post('/calculateRewardPoints', (req, res) => {
-    console.log("==================== calculateRewardPoints =========================0", req)
+    console.log("==================== calculateRewardPoints =========================")
     let rewardPoints = 0
     let totalTransactions = {sportcheck: 0, tim_hortons: 0, subway: 0, others: 0}
     rules.find({}).then(rulesList => {
         //finding total amount of transactions on all shops 
-        req.body.forEach(transaction => {             
+        req.body['transactionsList'].forEach(transaction => {             
             if(['sportcheck', 'tim_hortons', 'subway'].includes(transaction.merchant_code)) {
                 totalTransactions[transaction.merchant_code] += convertCentsToDollars(transaction.amount_cents);
             }
@@ -41,7 +39,7 @@ app.post('/calculateRewardPoints', (req, res) => {
         console.log("totalTransactions => ", totalTransactions)
 
         // finding main rules list from the multiple rulesList and sorting it according to priority
-        let mainRules = rulesList.find(rules => rules.rulesListName == rulesListName);
+        let mainRules = rulesList.find(rules => rules.rulesListName == req.body['selectedRules']);
         let priorityRulesList = (mainRules.rulesList).sort((a,b) => rulesComparator(a,b));
         console.log("priorityRulesList => ", priorityRulesList);
 
@@ -88,4 +86,6 @@ app.post('/calculateRewardPoints', (req, res) => {
     });
 });
 
-app.listen(3000, () => console.log("Server is connected on Port 3000"))
+app.listen(3000, () => console.log("Server is connected on Port 3000"));
+
+module.exports = app;

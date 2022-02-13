@@ -1,42 +1,32 @@
-var request = require("request");
-var server = require("./app");
+const request = require('supertest');
+var app = require('./app');
 
 describe("Server", () => {
     describe("GET /getRules", () => {
-        var data = {};
-        beforeAll((done) => {
-            request.get("http://localhost:3000/getRules", (error, response, body) => {
-                data.status = response.statusCode;
-                data.body = JSON.parse(body);
-                console.log("data test ====> ", data);
-                done();
-            });
-        });
-        it("Status 200", () => {
-            expect(data.status).toBe(200);
-        });
-        it("Body", () => {
-            expect(data.body.rulesListName).toBe('main');
+        it("GET", (done) => {
+            request(app).get('/getRules')
+                        .query({selectedRules: "main"})
+                        .expect(200)
+                        .expect('Content-Type', 'application/json; charset=utf-8')
+                        .expect((res) => { 
+                            res.body.rulesListName = 'main';
+                        })
+                        .end((error) => (error) ? done.fail(error) : done());
         });
     });
 
-    // describe("POST /calculateRewardPoints", () => {
-    //   var data = {};
-    //   var input = [ { date: "1/1/2021", merchant_code: "subway", amount_cents: 5000} ];
-    //   beforeAll((done) => {
-    //       request({method:'POST', uri: "http://localhost:3000/calculateRewardPoints", body: input}, (error, response, body) => {
-    //           console.log("calculateRewardPoints test ====> ", data, response);
-    //           data.status = response.statusCode;
-    //           data.body = JSON.parse(body);
-    //           done();
-    //       });
-    //   });
-    //   it("Status 200", () => {
-    //       expect(data.status).toBe(200);
-    //   });
-    //   it("Body", () => {
-    //       expect(data.body).toBe('main');
-    //   });
-    // });
+    describe("POST /calculateRewardPoints", () => {
+      var input = [ { date: "1/1/2021", merchant_code: "sportcheck", amount_cents: 8000}, { date: "1/1/2021", merchant_code: "the_bay", amount_cents: 4500} ];
+      it('POST', (done) => {
+        request(app).post('/calculateRewardPoints')
+                    .send({ selectedRules: 'main', transactionsList: input})
+                    .expect(200)
+                    .expect('Content-Type', 'application/json; charset=utf-8')
+                    .expect((res) => { 
+                        res.body.rewardPoints > 0;
+                    })
+                    .end((error) => (error) ? done.fail(error) : done());
+      });
+    });
 
 });

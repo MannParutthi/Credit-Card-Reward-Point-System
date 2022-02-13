@@ -13,8 +13,9 @@ export class RewardPointsCalculatorComponent implements OnInit {
 
   formGroup: FormGroup;
   listOfTransactions: TransactionModel[] = [];
-  rewardPoints: Number = 0;
+  rewardPoints: Number = -1;
   rulesApplied = {};
+  rulesSelected: string = "main";
 
   constructor(
     private formBuilder: FormBuilder,
@@ -38,12 +39,12 @@ export class RewardPointsCalculatorComponent implements OnInit {
   }
 
   checkRules() {
-    this.router.navigate(['/rules']);
+    this.router.navigate(["/rules", this.rulesSelected]); //.then(() => window.open('/rules', '_blank'));
   }
 
   calculateRewardPoints() {
     console.log("listOfTransactions => ", this.listOfTransactions)
-    this.rewardPointsCalculatorService.getRewardPoints(this.listOfTransactions).subscribe({
+    this.rewardPointsCalculatorService.getRewardPoints(this.rulesSelected, this.listOfTransactions).subscribe({
       next: (res: CalculateRewardsPointsResponse) => {
         this.rewardPoints = Number(res.rewardPoints);
         this.rulesApplied = res.rulesApplied;

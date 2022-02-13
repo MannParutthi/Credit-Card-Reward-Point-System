@@ -40,12 +40,23 @@
     <br />
   </div>
 
+  <mat-form-field appearance="outline" class="field">
+    <mat-label>Select rules to be used to calculate reward points</mat-label>
+    <mat-select [(ngModel)]="rulesSelected">
+      <mat-option value="main">Main</mat-option>
+      <mat-option value="example1">Example 1</mat-option>
+      <mat-option value="example2">Example 2</mat-option>
+      <mat-option value="example3">Example 3</mat-option>
+    </mat-select>
+  </mat-form-field>
+
   <button mat-raised-button color="primary" style="margin-bottom: 20px" (click)="calculateRewardPoints()">
     Calculate Reward Points
   </button>
+
 </div>
 
-<div class="container" *ngIf="rewardPoints > 0">
+<div class="container" *ngIf="rewardPoints > -1">
   <h1>Your Reward Points are : {{rewardPoints}}</h1>
 
   <div *ngFor="let rule of rulesApplied | keyvalue">

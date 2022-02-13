@@ -19,7 +19,7 @@ describe('RewardPointsCalculatorService', () => {
   });
 
   it('getRewardPoints', () => {
-    expect(service.getRewardPoints([ { date: "1/1/2021", merchant_code: "subway", amount_cents: 5000} ])).toBeInstanceOf(Observable);
+    expect(service.getRewardPoints('main', [ { date: "1/1/2021", merchant_code: "subway", amount_cents: 5000} ])).toBeInstanceOf(Observable);
   });
 
 });

@@ -11,9 +11,9 @@ export class RewardPointsCalculatorService {
 
   constructor(private http: HttpClient) { }
 
-  getRewardPoints(transactionsList: TransactionModel[]): Observable<CalculateRewardsPointsResponse> {
+  getRewardPoints(selectedRules: string, transactionsList: TransactionModel[]): Observable<CalculateRewardsPointsResponse> {
     let uri = "calculateRewardPoints"
-    return this.http.post(`${this.baseUrl}/${uri}` , transactionsList) as Observable<CalculateRewardsPointsResponse>;
+    return this.http.post(`${this.baseUrl}/${uri}`, {selectedRules, transactionsList}) as Observable<CalculateRewardsPointsResponse>;
   }
 }
 

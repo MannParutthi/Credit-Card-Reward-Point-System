@@ -11,8 +11,8 @@ export class RewardPointRulesService {
 
   constructor(private http: HttpClient) { }
 
-  getRules(): Observable<RewardPointRulesModel> {
+  getRules(selectedRules: string): Observable<RewardPointRulesModel> {
     let uri = "getRules";
-    return this.http.get(`${this.baseUrl}/${uri}`) as Observable<RewardPointRulesModel>;
+    return this.http.get(`${this.baseUrl}/${uri}`, {params: {selectedRules}}) as Observable<RewardPointRulesModel>;
   }
 }

@@ -6,7 +6,7 @@ import { RewardPointsCalculatorComponent } from './reward-points-calculator/rewa
 const routes: Routes = [
   { path: '', redirectTo: 'calculator', pathMatch: 'full' },
   { path: 'calculator', component: RewardPointsCalculatorComponent },
-  { path: 'rules', component: RewardPointRulesComponent }
+  { path: 'rules/:selectedRules', component: RewardPointRulesComponent }
 ];
 
 @NgModule({
