@@ -38,7 +38,7 @@ app.post('/calculateRewardPoints', (req, res) => {
         });
         console.log("totalTransactions => ", totalTransactions)
 
-        // finding main rules list from the multiple rulesList and sorting it according to priority
+        // finding rules list from the multiple rulesList and sorting it according to priority
         let mainRules = rulesList.find(rules => rules.rulesListName == req.body['selectedRules']);
         let priorityRulesList = (mainRules.rulesList).sort((a,b) => rulesComparator(a,b));
         console.log("priorityRulesList => ", priorityRulesList);
