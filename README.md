@@ -33,6 +33,9 @@ Go to "frontend" folder and run command "ng e2e" => Cypress Window will open whi
 6) Testing & Code Coverage: Jasmine, Karma, Nyc(Istanbul), Supertest
 7) End to End Testing: Cypress
 
+# Architecture
+![image](https://user-images.githubusercontent.com/26864799/153859926-2d72ded6-1f70-4444-af57-8ef52fd4ec5a.png)
+
 # Details about the project 
 ***The Problem Statement :*** 
 The aim is to create a rewards calculation system that calculates the total monthly reward points earned based on a customer's credit card purchases. More than one reward points calculation rules could apply to a merchant’s transaction(s) and the system should maximize the calculated points for a merchant by considering different priorities or combinations of the rules.
