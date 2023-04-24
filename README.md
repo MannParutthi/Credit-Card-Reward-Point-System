@@ -1,5 +1,5 @@
-# Credit Card Reward Point System - JavaScript Full Stack Application with Unit Testing & End to End Automation Testing
-***Tech Stack :*** MongoDB, Express.js, Angular & Node.js - MEAN Stack
+# Credit Card Reward Point System - JavaScript Full Stack Application with Unit Testing & End to End Automation Testing + Application logging with Log data analysis, monitoring and visualization
+***Tech Stack :*** MongoDB, Express.js, Angular & Node.js - MEAN Stack + Elasticsearch, Logstash & Kibana - ELK Stack
 
 # How to start / run application
 ## To Start Backend
