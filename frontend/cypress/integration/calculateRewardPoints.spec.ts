@@ -27,11 +27,14 @@ describe('Reward Points Calculator', () => {
     });
 
     // selecting rules list as Main
-    cy.get("#ruleName").type("main");
+    // cy.get("#ruleName").type("main");
 
-    cy.pause();
+    // cy.pause();
 
     // calculating reward points
     cy.get("#calculateRewardPointsBtn").click();
+
+    cy.wait(3000);
+    cy.scrollTo('bottom');
   });
 });

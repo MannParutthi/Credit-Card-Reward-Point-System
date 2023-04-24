@@ -4,6 +4,8 @@ const mongoose = require('./database/mongoose');
 const rules = require('./database/models/rules');
 const initialRulesSetup = require('./rulesSetup');
 const { convertCentsToDollars, rulesComparator } = require('./utils');
+const winston = require('winston');
+const { combine, timestamp } = winston.format;
 
 app.use(express.json());
 
@@ -14,15 +16,38 @@ app.use((req, res, next) => {
     next();
 });
 
+const logger = winston.createLogger({
+    level: 'info',
+    format: combine(
+      timestamp(),
+      winston.format.printf(info => {
+        return `${info.timestamp} [${info.service}] ${info.level}: ${info.message} : ${info[Symbol.for('splat')] ? JSON.stringify(info[Symbol.for('splat')][0]) : ''}`;
+      })
+    ),
+    defaultMeta: { service: 'reward-point-service' },
+    transports: [
+      new winston.transports.File({ filename: 'error.log', level: 'error', 'timestamp':true }),
+      new winston.transports.File({ filename: 'combined.log', 'timestamp':true }),
+    ],
+  });
+  
+  //print logs to console
+  logger.add(new winston.transports.Console({
+    format: winston.format.simple(),
+  }));
+
 initialRulesSetup();
+logger.info("initialRulesSetup", "Rules setup completed");
 
 app.get('/getRules', (req, res) => {
+    logger.info("getRules", req.query);
     rules.findOne({rulesListName: req.query['selectedRules']})
         .then(rulesList => res.send(rulesList))
         .catch(err => console.log(err));
 });
 
 app.post('/calculateRewardPoints', (req, res) => {
+    logger.info("calculateRewardPoints", req.body);
     console.log("==================== calculateRewardPoints =========================")
     let rewardPoints = 0
     let totalTransactions = {sportcheck: 0, tim_hortons: 0, subway: 0, others: 0}
@@ -37,6 +62,7 @@ app.post('/calculateRewardPoints', (req, res) => {
             }
         });
         console.log("totalTransactions => ", totalTransactions)
+        logger.info("totalTransactions", totalTransactions);
 
         // finding rules list from the multiple rulesList and sorting it according to priority
         let mainRules = rulesList.find(rules => rules.rulesListName == req.body['selectedRules']);
@@ -81,7 +107,8 @@ app.post('/calculateRewardPoints', (req, res) => {
             }
         });
 
-        console.log("rulesApplied => ", rulesApplied)
+        console.log("rulesApplied => ", rulesApplied);
+        logger.info("rulesApplied", rulesApplied);
         res.send({rewardPoints: rewardPoints, rulesApplied: rulesApplied})
     });
 });
