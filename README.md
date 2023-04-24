@@ -24,6 +24,43 @@
 # End to End Testing
 Go to "frontend" folder and run command "ng e2e" => Cypress Window will open which will have different testcase - click on it to run
 
+# Setup ELK Stack in Local
+## Elasticsearch (Storage & Indexing) 
+Download Link : https://www.elastic.co/downloads/elasticsearch  
+Note: Refer "ELK Stack\elasticsearch.yml" file given in this Repo & follow steps mentioned below
+1) Go to config folder => open elasticsearch.yml file  
+		Add "action.auto_create_index: .monitoring*,.watches,.triggered_watches,.watcher-history*,.ml*" this line to allow automatic index creation  
+		Save and close the file 
+2) Go to bin folder => run command "elasticsearch.bat" it will generate password and enrollment token for kibana (copy and save it for future use)
+3) Go to config folder => open elasticsearch.yml file  
+		Change enabled to false in xpack.security.http.ssl & xpack.security.transport.ssl  
+		Save and close the file  
+4) Go to bin folder => run command "elasticsearch.bat"
+5) Check "http://localhost:9200/" it will ask login credentials => username = elastic & password = elastic password generated which you copied  
+	To reset and get password again => Go to bin folder => run command "elasticsearch-reset-password -u elastic"
+6) Go to bin folder => run command "elasticsearch-reset-password -u kibana_system" => copy and save the kibana password 
+## Kibana (Data Analysis & Visualization)
+Download Link : https://www.elastic.co/downloads/kibana  
+Note: Refer "ELK Stack\kibana.yml" file given in this Repo & follow steps mentioned below
+1) Go to config folder => open kibana.yml file  
+		Uncomment server.port, server.host, elasticsearch.host, elasticsearch.username & elasticsearch.password  
+		Update the password => the kibana password which you saved previously  
+		Save and close the file  
+2) Go to bin folder => run command "kibana.bat"
+3) Go to "http://localhost:5601" it will ask login credentials => username = elastic & password = elastic password which you copied
+## Logstash (Data Processing)
+Download Link : https://www.elastic.co/downloads/logstash  
+Note: Refer "ELK Stack\credit-card-reward-calculator-logstash.conf" file given in this Repo & follow steps mentioned below
+1) Go to config folder => open the credit-card-reward-calculator-logstash.conf file  
+		Update the password => the elastic password which you saved previously  
+2) Go to bin folder => run command "logstash -f .\config\credit-card-reward-calculator-logstash.conf --config.reload.automatic"
+## Create Kibana Dashboard
+On Elastic Search Portal ==>  
+1) Go to Stack Management ==> Index Management ==> find file "logstsh_index_logdata-credit-card-reward-point-system-%{+YYYY.MM.dd}" with today's date => copy name  
+2) Go to Stack Management ==> Data Views ==> Create Data View => In index pattern write "logstsh_index_logdata-credit-card-reward-point-system-%{+YYYY.MM.dd}" & give any name as requried => Click Save data view to kibana  
+3) Go to Dashboard ==> Create Dashboard ==> Click on Create Visualization ==> Top left side in dropdown select the data view name which you created in prev step  
+  
+
 # Softwares / Tools required :
 1) MongoDB shell version: 5.0.6
 2) Express version: 4.17.2
@@ -32,6 +69,7 @@ Go to "frontend" folder and run command "ng e2e" => Cypress Window will open whi
 5) Node Package Manager (npm) version: 8.4.0
 6) Testing & Code Coverage: Jasmine, Karma, Nyc(Istanbul), Supertest
 7) End to End Testing: Cypress
+8) ELK Stack: Elasticsearch v8.5.3, Logstash v8.5.3, Kibana v8.5.3
 
 # Architecture
 ![image](https://user-images.githubusercontent.com/26864799/153859926-2d72ded6-1f70-4444-af57-8ef52fd4ec5a.png)
