@@ -57,8 +57,9 @@ Note: Refer "ELK Stack\credit-card-reward-calculator-logstash.conf" file given i
 ## Create Kibana Dashboard
 On Elastic Search Portal ==>  
 1) Go to Stack Management ==> Index Management ==> find file "logstsh_index_logdata-credit-card-reward-point-system-%{+YYYY.MM.dd}" with today's date => copy name  
-2) Go to Stack Management ==> Data Views ==> Create Data View => In index pattern write "logstsh_index_logdata-credit-card-reward-point-system-%{+YYYY.MM.dd}" & give any name as requried => Click Save data view to kibana  
-3) Go to Dashboard ==> Create Dashboard ==> Click on Create Visualization ==> Top left side in dropdown select the data view name which you created in prev step  
+2) Go to Stack Management ==> Data Views ==> Create Data View => In index pattern write "logstsh_index_logdata-credit-card-reward-point-system" & give any name as requried => Click Save data view to kibana   
+3) Go to http://localhost:5601/app/home#/ ==> Click on 'Discover' from the left menu ==> Select the Data View created to check the data which is parsed and will be used for visualization in dashboard 
+4) Go to Dashboard ==> Create Dashboard ==> Click on Create Visualization ==> Top left side in dropdown select the data view name which you created in prev step  
   
 
 # Softwares / Tools required :
