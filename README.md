@@ -51,7 +51,7 @@ Note: Refer "ELK Stack\kibana.yml" file given in this Repo & follow steps mentio
 ## Logstash (Data Processing)
 Download Link : https://www.elastic.co/downloads/logstash  
 Note: Refer "ELK Stack\credit-card-reward-calculator-logstash.conf" file given in this Repo & follow steps mentioned below
-1) Go to config folder => open the credit-card-reward-calculator-logstash.conf file  
+1) Go to config folder => open the credit-card-reward-calculator-logstash.conf file (Use https://grokdebugger.com/ and https://github.com/hpcugent/logstash-patterns/blob/master/files/grok-patterns for GROK Patterns)   
 		Update the password => the elastic password which you saved previously  
 2) Go to bin folder => run command "logstash -f .\config\credit-card-reward-calculator-logstash.conf --config.reload.automatic"
 ## Create Kibana Dashboard
