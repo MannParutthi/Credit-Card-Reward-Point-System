@@ -72,6 +72,7 @@ On Elastic Search Portal ==>
 8) ELK Stack: Elasticsearch v8.5.3, Logstash v8.5.3, Kibana v8.5.3
 
 # Architecture
+![Architecture - Credit Card Reward Point System](https://user-images.githubusercontent.com/26864799/234319612-fa828169-2dea-4ae6-97c4-59b3e486e901.png)
 ![image](https://user-images.githubusercontent.com/26864799/153859926-2d72ded6-1f70-4444-af57-8ef52fd4ec5a.png)
 
 # Details about the project 
